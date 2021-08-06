@@ -81,6 +81,13 @@ function create_overlay_image() {
     mkfs.ext4 -L "hassos-overlay" -E lazy_itable_init=0,lazy_journal_init=0 "${overlay_img}"
 }
 
+# 创建data image
+function create_data_image() {
+    local data_img="$(path_data_img)"
+    rm -rf  ${data_img}
+    truncate --size=${DATA_SIZE}  ${data_img}
+    mkfs.ext4 -L "data"  -E lazy_itable_init=0,lazy_journal_init=0  ${data_img}
+}
 
 function create_kernel_image() {
     local kernel_img="$(path_kernel_img)"
@@ -104,6 +111,7 @@ function _prepare_disk_image() {
     create_boot_image
     create_overlay_image
     create_kernel_image
+    create_data_image
 }
 
 
