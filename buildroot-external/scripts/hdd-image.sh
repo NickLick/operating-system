@@ -111,7 +111,7 @@ function _prepare_disk_image() {
     create_boot_image
     create_overlay_image
     create_kernel_image
-    create_data_image
+   # create_data_image
 }
 
 
